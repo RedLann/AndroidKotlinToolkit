@@ -1,3 +1,4 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -26,6 +27,16 @@ android {
     dataBinding {
         enabled = true
     }
+}
+
+publish {
+    userOrg = bt_userOrg
+    groupId = bt_groupId
+    repoName = bt_repoName
+    website = bt_website
+    artifactId = android.defaultConfig.project.name
+    publishVersion = android.defaultConfig.versionName
+    desc = ''
 }
 
 dependencies {

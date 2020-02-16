@@ -45,6 +45,8 @@ publish {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}")
+    testImplementation("junit:junit:4.12")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
 }

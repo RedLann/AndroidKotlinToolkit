@@ -4,6 +4,7 @@ object Modules {
     const val minSdk = 23
     const val targetSdk = 29
     const val buildToolsVersion = "29.0.3"
+    const val dryRun = "true"
 }
 
 object Versions {

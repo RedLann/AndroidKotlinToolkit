@@ -21,22 +21,17 @@ allprojects {
     ext {
         set("bintrayUser", System.getenv("bintrayUser"))
         set("bintrayKey", System.getenv("bintrayKey"))
-        set("dryRun", Modules.dryRun)
+        set("dryRun", System.getenv("dryRun"))
     }
 
 }
 
 subprojects {
     val subprojectName = name
-    tasks.register("bintrayPublish", DefaultTask::class){
-        dependsOn(":$subprojectName:build", ":$subprojectName:bintrayUpload")
-    }
-}
-
-tasks.register("bintrayPublish", DefaultTask::class) {
-    doFirst {
-        val publishingSubprojects = subprojects.filter { s -> s.plugins.hasPlugin("com.novoda.bintray-release") }.map { it.name + ":bintrayPublish" }.toTypedArray()
-        println("./gradlew "+publishingSubprojects.joinToString(" "))
+    pluginManager.withPlugin("com.novoda.bintray-release") {
+        tasks.register("bintrayPublish", DefaultTask::class) {
+            dependsOn(":$subprojectName:build", ":$subprojectName:bintrayUpload")
+        }
     }
 }
 

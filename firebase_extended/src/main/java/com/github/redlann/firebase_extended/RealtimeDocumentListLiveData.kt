@@ -26,7 +26,7 @@ class RealtimeDocumentListLiveData<T : DTO>(
                 cacheValue = data
                 val list = mutableListOf<T>()
                 data.children.asFlow().mapNotNull {
-                    it.getValue(type)
+                    it.key?.let { k -> it.getValue(type)?.withId<T>(k) }
                 }.toList(list)
                 postValue(Success(list))
             }
